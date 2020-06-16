@@ -1,13 +1,15 @@
+require_relative 'station'
+require_relative 'journey'
 
 class OysterCard
-    attr_reader :balance, :in_journey, :entry_station, :exit_station, :journey_history
+    attr_reader :balance, :in_journey, :entry_station, :exit_station, :journey_history, :journey
 
     MAXIMUM_BALANCE = 90
     MINIMUM_BALANCE = 1
 
   
-    def initialize
-      @in_journey = false
+    def initialize(journey = Journey.new)
+      @journey = journey
       @balance = 0
       @entry_station = entry_station
       @exit_station = exit_station
@@ -24,7 +26,7 @@ class OysterCard
       fail "Unable to touch in. Minimum of 1 pound credit required" unless deceded?
       fail "Already in journey" if in_journey?
       @entry_station = entry_station 
-      @in_journey = true
+      @journey.start
     end 
 
     def touch_out(exit_station)
@@ -33,7 +35,7 @@ class OysterCard
       @exit_station = exit_station
       @journey_history.push({ entry: @entry_station, exit: @exit_station })
       @entry_station = nil
-      @in_journey = false
+      @journey.end
       
      
     end 
