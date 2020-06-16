@@ -21,7 +21,7 @@ class OysterCard
     end 
 
     def touch_in
-      fail "Unable to touch in. Minimum of 1 pound credit required" unless @balance >= MINIMUM_BALANCE
+      fail "Unable to touch in. Minimum of 1 pound credit required" unless deceded?
       @in_journey = true
     end 
 
@@ -35,6 +35,9 @@ class OysterCard
       return true if @balance + credit > MAXIMUM_BALANCE
     end 
 
+    def deceded?
+      return true if @balance >= MINIMUM_BALANCE
+    end 
     
     
 
