@@ -14,6 +14,10 @@ class OysterCard
       @balance += credit
     end 
 
+    def deduct(credit)
+      @balance -= credit
+    end 
+
     private
 
     def exceeded?(credit)
