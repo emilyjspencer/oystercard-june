@@ -23,6 +23,13 @@ describe OysterCard do
         oystercard.add(20)
         expect(oystercard.deduct(10)).to eq 10
       end 
+
+      it 'has one pound deducted from it for each journey' do
+        oystercard.add(20)
+        oystercard.touch_in
+        oystercard.touch_out
+        expect(oystercard.balance).to eq 19
+      end 
     end 
 
     describe '#touch_in' do
