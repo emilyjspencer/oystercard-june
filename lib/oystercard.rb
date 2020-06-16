@@ -1,6 +1,6 @@
 
 class OysterCard
-    attr_reader :balance, :in_journey, :entry_station, :exit_station
+    attr_reader :balance, :in_journey, :entry_station, :exit_station, :journey_history
 
     MAXIMUM_BALANCE = 90
     MINIMUM_BALANCE = 1
@@ -11,6 +11,7 @@ class OysterCard
       @balance = 0
       @entry_station = entry_station
       @exit_station = exit_station
+      @journey_history = []
     end 
 
     def add(credit)
@@ -24,6 +25,7 @@ class OysterCard
       fail "Already in journey" if in_journey?
       @entry_station = entry_station 
       @in_journey = true
+      @journey_history.push(entry_station)
     end 
 
     def touch_out(exit_station)
@@ -32,6 +34,7 @@ class OysterCard
       @exit_station = exit_station
       @entry_station = nil
       @in_journey = false
+      @journey_history.push(exit_station)
     end 
 
     def in_journey?

@@ -68,5 +68,15 @@ describe OysterCard do
         expect(oystercard.entry_station).to eq nil
       end 
     end 
+
+    describe '#journey_history' do
+      it 'shows a list of the journeys made' do
+        oystercard.add(20)
+        oystercard.touch_in(station1)
+        oystercard.touch_out(station2)
+        expect(oystercard.journey_history).to include station1
+      end
+    end 
+
     
 end 
