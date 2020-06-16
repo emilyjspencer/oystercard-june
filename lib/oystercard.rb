@@ -25,16 +25,17 @@ class OysterCard
       fail "Already in journey" if in_journey?
       @entry_station = entry_station 
       @in_journey = true
-      @journey_history.push(entry_station)
     end 
 
     def touch_out(exit_station)
       fail "Card not in use" if !in_journey?
       deduct(MINIMUM_BALANCE)
       @exit_station = exit_station
+      @journey_history.push({ entry: @entry_station, exit: @exit_station })
       @entry_station = nil
       @in_journey = false
-      @journey_history.push(exit_station)
+      
+     
     end 
 
     def in_journey?

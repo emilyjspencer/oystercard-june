@@ -5,6 +5,7 @@ describe OysterCard do
     let(:oystercard) { OysterCard.new }
     let(:station1) { double :station1 }
     let(:station2) { double :station2 }
+    let(:journey_made) { { entry: station1, exit: station2 }}
 
 
     describe '#add' do
@@ -48,7 +49,7 @@ describe OysterCard do
     end 
 
     describe '#touch_out' do
-      it 'can touch out at an exit station' do
+      it 'is no longer in_journey when touching out' do
         oystercard.add(20)
         oystercard.touch_in(station1)
         oystercard.touch_out(station2)
@@ -74,7 +75,7 @@ describe OysterCard do
         oystercard.add(20)
         oystercard.touch_in(station1)
         oystercard.touch_out(station2)
-        expect(oystercard.journey_history).to include station1
+        expect(oystercard.journey_history).to include journey_made
       end
     end 
 
