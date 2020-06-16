@@ -25,5 +25,12 @@ describe OysterCard do
       end 
     end 
 
+    describe '#touch_in' do
+      it 'can touch in at a station' do
+        oystercard.add(20)
+        oystercard.touch_in
+        expect(oystercard.in_journey).to eq true
+      end
+    end 
     
 end 
