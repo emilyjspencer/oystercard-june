@@ -16,9 +16,6 @@ class OysterCard
       @balance += credit
     end 
 
-    def deduct(credit)
-      @balance -= credit
-    end 
 
     def touch_in
       fail "Unable to touch in. Minimum of 1 pound credit required" unless deceded?
@@ -26,8 +23,8 @@ class OysterCard
     end 
 
     def touch_out
+      deduct(MINIMUM_BALANCE)
       @in_journey = false
-      @balance -= MINIMUM_BALANCE
     end 
 
     private
@@ -38,6 +35,12 @@ class OysterCard
 
     def deceded?
       return true if @balance >= MINIMUM_BALANCE
+    end 
+
+    private
+
+    def deduct(credit)
+      @balance -= credit
     end 
     
     

@@ -18,19 +18,7 @@ describe OysterCard do
       end 
     end 
 
-    describe '#deduct' do
-      it 'can have credit deducted from it' do
-        oystercard.add(20)
-        expect(oystercard.deduct(10)).to eq 10
-      end 
 
-      it 'has one pound deducted from it for each journey' do
-        oystercard.add(20)
-        oystercard.touch_in
-        oystercard.touch_out
-        expect(oystercard.balance).to eq 19
-      end 
-    end 
 
     describe '#touch_in' do
       it 'can touch in at an entry station' do
@@ -51,6 +39,12 @@ describe OysterCard do
         oystercard.touch_out
         expect(oystercard.in_journey).to eq false
       end
+
+      it 'deducts one pound from the credit upon touching out' do
+        oystercard.add(20)
+        oystercard.touch_in
+        expect { oystercard.touch_out }.to change{ oystercard.balance }.by(-OysterCard::MINIMUM_BALANCE)
+      end 
     end 
     
 end 
