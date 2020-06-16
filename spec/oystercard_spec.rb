@@ -31,6 +31,10 @@ describe OysterCard do
         oystercard.touch_in
         expect(oystercard.in_journey).to eq true
       end
+
+      it 'raises an error if the card balance is less than 1 pound' do
+        expect { oystercard.touch_in }.to raise_error "Unable to touch in. Minimum of 1 pound credit required"
+      end 
     end 
 
     describe '#touch_out' do
