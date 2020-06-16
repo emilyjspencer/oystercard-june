@@ -1,21 +1,26 @@
 
 class OysterCard
     attr_reader :balance
+
+    MAXIMUM_BALANCE = 90
+
   
     def initialize
       @balance = 0
     end 
 
     def add(credit)
-      fail "Unable to add credit. Maximum balance is 90" if maximum_balance
+      fail "Unable to add credit. Maximum balance of #{MAXIMUM_BALANCE} exceeded" if exceeded?(credit)
       @balance += credit
     end 
 
-    private 
+    private
 
-    def maximum_balance
-      return true if @balance >= 90
+    def exceeded?(credit)
+      return true if @balance + credit > MAXIMUM_BALANCE
     end 
+
+    
     
 
 end 

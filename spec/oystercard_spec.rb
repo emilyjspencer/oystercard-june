@@ -12,8 +12,9 @@ describe OysterCard do
       end
 
       it 'can have no more than 90 pounds of credit added to it' do
-        oystercard.add(90)
-        expect { oystercard.add(10) }.to raise_error "Unable to add credit. Maximum balance is 90"
+        maximum_balance = OysterCard::MAXIMUM_BALANCE
+        oystercard.add(maximum_balance)
+        expect { oystercard.add(10) }.to raise_error "Unable to add credit. Maximum balance of #{maximum_balance} exceeded"
       end 
     end 
 
