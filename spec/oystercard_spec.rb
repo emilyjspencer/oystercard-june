@@ -4,6 +4,7 @@ describe OysterCard do
 
     let(:oystercard) { OysterCard.new }
     let(:station1) { double :station1 }
+    let(:station2) { double :station2 }
 
 
     describe '#add' do
@@ -50,14 +51,21 @@ describe OysterCard do
       it 'can touch out at an exit station' do
         oystercard.add(20)
         oystercard.touch_in(station1)
-        oystercard.touch_out
+        oystercard.touch_out(station2)
         expect(oystercard.in_journey).to eq false
       end
 
       it 'deducts one pound from the credit upon touching out' do
         oystercard.add(20)
         oystercard.touch_in(station1)
-        expect { oystercard.touch_out }.to change{ oystercard.balance }.by(-OysterCard::MINIMUM_BALANCE)
+        expect { oystercard.touch_out(station2) }.to change{ oystercard.balance }.by(-OysterCard::MINIMUM_BALANCE)
+      end 
+
+      it 'forgets the entry station when touching out' do
+        oystercard.add(20)
+        oystercard.touch_in(station1)
+        oystercard.touch_out(station2)
+        expect(oystercard.entry_station).to eq nil
       end 
     end 
     

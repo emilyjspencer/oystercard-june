@@ -1,6 +1,6 @@
 
 class OysterCard
-    attr_reader :balance, :in_journey, :entry_station
+    attr_reader :balance, :in_journey, :entry_station, :exit_station
 
     MAXIMUM_BALANCE = 90
     MINIMUM_BALANCE = 1
@@ -10,6 +10,7 @@ class OysterCard
       @in_journey = false
       @balance = 0
       @entry_station = entry_station
+      @exit_station = exit_station
     end 
 
     def add(credit)
@@ -25,10 +26,11 @@ class OysterCard
       @in_journey = true
     end 
 
-    def touch_out
+    def touch_out(exit_station)
       fail "Card not in use" if !in_journey?
       deduct(MINIMUM_BALANCE)
-      entry_station = nil
+      @exit_station = exit_station
+      @entry_station = nil
       @in_journey = false
     end 
 
