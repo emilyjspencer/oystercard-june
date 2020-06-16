@@ -27,7 +27,7 @@ class OysterCard
 
     def touch_out
       @in_journey = false
-      @balance -= 1
+      @balance -= MINIMUM_BALANCE
     end 
 
     private
