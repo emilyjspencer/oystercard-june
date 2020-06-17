@@ -31,7 +31,6 @@ class Journey
 
   def calculate_fare
     incomplete? ? @fare = PENALTY_FARE : @fare = MINIMUM_FARE
-    #@fare = PENALTY_FARE if incomplete?
   end 
 
 
